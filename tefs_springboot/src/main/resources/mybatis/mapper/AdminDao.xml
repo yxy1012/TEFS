@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tefs_springboot.dao.AdminDao">
+  <resultMap id="BaseResultMap" type="com.example.tefs_springboot.pojo.entity.Admin">
+    <id column="Admin_ID" jdbcType="INTEGER" property="adminId" />
+    <result column="User_Name" jdbcType="VARCHAR" property="userName" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Admin_ID, User_Name, `Password`
+  </sql>
+  <select id="selectByUserName" resultType="com.example.tefs_springboot.pojo.entity.Admin">
+    select
+    <include refid="Base_Column_List" />
+    from admin
+    where User_Name = #{username,jdbcType=VARCHAR}
+  </select>
+</mapper>

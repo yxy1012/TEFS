@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tefs_springboot.dao.VideoDao">
+
+
+    <select id="selectAllVideos" resultType="com.example.tefs_springboot.pojo.entity.Video">
+    select
+    Video_ID,Video_Name,Video_Url,Video_Size,Video_Addtime,Video_Status,Video_Length,Video_Duration,Video_Poster,User_ID,Video_Type
+    from video
+    where User_ID = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.tefs_springboot.pojo.entity.Video">
+        select
+        Video_ID,Video_Name,Video_Url,Video_Size,Video_Addtime,Video_Status,Video_Length,Video_Duration,Video_Poster,User_ID,Video_Type
+        from video
+        where Video_ID = #{videoId,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" keyColumn="Video_ID" keyProperty="videoId" parameterType="com.example.tefs_springboot.pojo.entity.Video" useGeneratedKeys="true">
+    insert into video (Video_Name, Video_Url, User_ID)
+    values (#{videoName,jdbcType=VARCHAR},#{videoUrl,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER})
+  </insert>
+    <delete id="delete" parameterType="java.lang.Integer">
+    delete from video
+    where Video_ID = #{videoId,jdbcType=INTEGER}
+  </delete>
+    <update id="update" parameterType="com.example.tefs_springboot.pojo.entity.Video">
+    update video
+    set  Video_Name = #{videoName,jdbcType=VARCHAR}
+    where Video_ID = #{videoId,jdbcType=INTEGER}
+  </update>
+    <update id="updateUrl" parameterType="com.example.tefs_springboot.pojo.entity.Video">
+    update video
+    set  Video_Url = #{videoUrl,jdbcType=VARCHAR}
+    where Video_ID = #{videoId,jdbcType=INTEGER}
+  </update>
+</mapper>
